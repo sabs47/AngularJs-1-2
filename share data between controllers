@@ -1,0 +1,30 @@
+app.service('ServiceShare', function() {
+  var ListObject = [];
+
+  var addProduct = function(newObj) {
+      ListObject.push(newObj);
+  };
+
+  var getProducts = function(){
+      return ListObject;
+  };
+
+  return {
+    addProduct: addProduct,
+    getProducts: getProducts
+  };
+
+});
+
+/* in your First Controller*/
+app.controller('Controller1', function($scope, ServiceShare) {
+    $scope.callToAddToObjectist = function(currObj){
+        ServiceShare.addProduct(currObj);
+    };
+});
+
+/*in your second Controller */
+
+app.controller('Controller2', function($scope, ServiceShare) {
+    $scope.consumeService = ServiceShare.getProducts();
+});
